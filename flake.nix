@@ -1,5 +1,8 @@
 {
   inputs = {
+    nixpkgs = {
+      url = "github:NixOS/nixpkgs/nixos-22.05";
+    };
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,6 +19,8 @@
           inherit system;
           modules = [
             ./init-image.nix
+            ./contaboBaseModule.nix
+            ./keys/nixosModule.nix
           ];
           format = "qcow";
         };
