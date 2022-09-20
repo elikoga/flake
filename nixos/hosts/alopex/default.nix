@@ -14,6 +14,7 @@ in
     openssh.authorizedKeys.keys = keyfiles.elikoga;
     isNormalUser = true;
   };
+  users.users.root.openssh.authorizedKeys.keys = keyfiles.elikoga;
   users.mutableUsers = false;
 
   networking.hostName = "alopex";
