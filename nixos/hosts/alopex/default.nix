@@ -13,7 +13,15 @@ in
   services.openssh.enable = true;
   services.fail2ban.enable = true;
   services.vscode-server.enable = true;
-  services.netdata.enable = true;
+  services.netdata = {
+    enable = true;
+    configDir = {
+      "cloud.d/cloud.conf" = pkgs.writeText "cloud.conf" ''
+        [global]
+          enabled = no
+      '';
+    };
+  };
   services.nginx = {
     enable = true;
     recommendedOptimisation = true;
@@ -81,4 +89,7 @@ in
   # The comment: Read the changelogs.
   system.stateVersion = "22.05"; # Did you read the comment?
 }
+
+
+
 
