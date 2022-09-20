@@ -29,6 +29,11 @@
               (modulePath + "/profiles/contabo-bootstrap.nix")
             ];
           });
+          alopex = nixpkgs.lib.nixosSystem (baseConfiguration // {
+            modules = [
+              ./nixos/hosts/alopex
+            ];
+          });
         };
     };
 }
