@@ -9,9 +9,12 @@ in
   ];
 
   services.openssh.enable = true;
+
   users.users.elikoga = {
     openssh.authorizedKeys.keys = keyfiles.elikoga;
     isNormalUser = true;
   };
   users.mutableUsers = false;
+
+  networking.hostName = "alopex";
 }
