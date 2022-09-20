@@ -1,8 +1,7 @@
 {
   inputs = {
-    nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixos-22.05";
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
+    inputs.vscode-server.url = "github:msteen/nixos-vscode-server";
   };
   outputs = inputs@{ self, nixpkgs, ... }:
     let
