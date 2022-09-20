@@ -1,4 +1,5 @@
 { lib, ... }:
+# Module setting access keys for systems
 let keyfiles = (import ./keyfiles.nix {
   inherit lib;
 }); in

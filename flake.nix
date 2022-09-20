@@ -3,29 +3,32 @@
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-22.05";
     };
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
-  outputs = { self, nixpkgs, nixos-generators, ... }:
+  outputs = inputs@{ self, nixpkgs, ... }:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {
+        inherit system;
+      };
+      modulePath = ./nixos/modules;
     in
     {
-      packages.${system} = {
-        qcow2 = nixos-generators.nixosGenerate {
-          inherit system;
-          modules = [
-            ./init-image.nix
-            ./contaboBaseModule.nix
-            ./keys/nixosModule.nix
-          ];
-          format = "qcow";
+      packages.${system} = import ./pkgs { inherit system pkgs; };
+      nixosConfigurations =
+        let
+          baseConfiguration = {
+            inherit system;
+            specialArgs = {
+              inherit inputs;
+            };
+          };
+        in
+        {
+          contaboBootstrap = nixpkgs.lib.nixosSystem (baseConfiguration // {
+            modules = [
+              (modulePath + "/profiles/contabo-bootstrap.nix")
+            ];
+          });
         };
-
-        contabo-cli = pkgs.callPackage ./contabo-cli.nix { };
-      };
     };
 }
