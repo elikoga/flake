@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, ... }:
+{ inputs, pkgs, lib, config, ... }:
 let
   keyfiles = import (inputs.self + "/keys/keyfiles.nix") { inherit lib; };
 in
@@ -50,7 +50,24 @@ in
         "netdata.alopex.6xr.de" = rootBase {
           proxyPass = "http://localhost:19999/";
         };
+        "auth.alopex.6xr.de" = rootBase { };
       };
+  };
+
+  age.secrets.alopex_oauth2_proxy_keyFile.file = inputs.self + "/secrets/alopex_oauth2_proxy_keyFile.age";
+
+  services.oauth2_proxy = {
+    enable = true;
+    nginx.virtualHosts = [
+      "netdata.alopex.6xr.de"
+      "auth.alopex.6xr.de"
+    ];
+    redirectURL = "https://auth.alopex.6xr.de/oauth2/callback";
+    provider = "github";
+    keyFile = config.age.secrets.alopex_oauth2_proxy_keyFile.path;
+    email.addresses = "elikowa" + "@" + "gmail.com";
+    reverseProxy = true;
+    setXauthrequest = true;
   };
 
   security.acme = {
