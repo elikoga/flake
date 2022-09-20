@@ -40,7 +40,7 @@ in
 
   security.acme = {
     acceptTerms = true;
-    email = "elikowa" + "@" + "gmail.com";
+    defaults.email = "elikowa" + "@" + "gmail.com";
   };
 
   users.users.elikoga = {
