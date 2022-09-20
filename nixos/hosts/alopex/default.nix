@@ -68,6 +68,9 @@ in
     email.addresses = "elikowa" + "@" + "gmail.com";
     reverseProxy = true;
     setXauthrequest = true;
+    extraConfig = {
+      "whitelist-domain" = "*.alopex.6xr.de";
+    };
   };
 
   security.acme = {
