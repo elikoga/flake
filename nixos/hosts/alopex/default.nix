@@ -50,16 +50,15 @@ in
   users.users.root.openssh.authorizedKeys.keys = keyfiles.elikoga;
   users.mutableUsers = false;
 
-  networking.hostName = " alopex ";
+  networking.hostName = "alopex";
 
   networking.defaultGateway6 = {
-    address = " fe80::1 ";
-    interface = "
-              ens18 ";
+    address = "fe80::1";
+    interface = "ens18";
   };
 
   networking.interfaces.ens18.ipv6.addresses = [{
-    address = " 2 a02:c206:3009:7843::1 ";
+    address = "2a02:c206:3009:7843::1";
     prefixLength = 64;
   }];
 
@@ -72,11 +71,10 @@ in
   ];
 
   environment.variables = {
-    EDITOR = "
-              nvim ";
+    EDITOR = "nvim";
   };
 
   # The comment: Read the changelogs.
-  system.stateVersion = " 22.05 "; # Did you read the comment?
+  system.stateVersion = "22.05"; # Did you read the comment?
 }
 
