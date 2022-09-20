@@ -69,6 +69,7 @@ in
     reverseProxy = true;
     setXauthrequest = true;
     scope = "user:email";
+    cookie.domain = ".alopex.6xr.de";
     extraConfig = {
       "whitelist-domain" = "*.alopex.6xr.de";
     };
