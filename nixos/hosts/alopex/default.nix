@@ -16,9 +16,14 @@ in
   services.netdata = {
     enable = true;
   };
-  environment.etc."netdata/cloud.d/cloud.conf".text = ''
+  # see https://discourse.nixos.org/t/how-to-create-folder-in-var-lib-with-nix/15647
+  # https://github.com/NixOS/nixpkgs/blob/2ddc335e6f32b875e14ad9610101325b306a0add/nixos/modules/system/activation/activation-script.nix#L214-L228
+  config.system.activationScripts.disableNetdataCloud = lib.stringAfter [ "var" ] ''
+    mkdir -p /var/lib/netdata/cloud.d
+    cat > /var/lib/netdata/cloud.d/cloud.conf <<EOF
     [global]
       enabled = no
+    EOF
   '';
   services.nginx = {
     enable = true;
