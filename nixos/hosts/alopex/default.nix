@@ -31,6 +31,16 @@ in
     prefixLength = 64;
   }];
 
+  environment.systemPackages = [
+    pkgs.git
+    pkgs.nixpkgs-fmt
+    pkgs.neovim
+  ];
+
+  environment.variables = {
+    EDITOR = "nvim";
+  };
+
   # The comment: Read the changelogs.
   system.stateVersion = "22.05"; # Did you read the comment?
 }
