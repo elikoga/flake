@@ -50,6 +50,8 @@ in
   users.users.root.openssh.authorizedKeys.keys = keyfiles.elikoga;
   users.mutableUsers = false;
 
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
+
   networking.hostName = "alopex";
 
   networking.defaultGateway6 = {
