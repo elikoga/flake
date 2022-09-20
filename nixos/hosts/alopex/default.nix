@@ -20,4 +20,7 @@ in
   users.mutableUsers = false;
 
   networking.hostName = "alopex";
+
+  # The comment: Read the changelogs.
+  system.stateVersion = "22.05"; # Did you read the comment?
 }
