@@ -15,13 +15,11 @@ in
   services.vscode-server.enable = true;
   services.netdata = {
     enable = true;
-    configDir = {
-      "../cloud.d/cloud.conf" = pkgs.writeText "cloud.conf" ''
-        [global]
-          enabled = no
-      '';
-    };
   };
+  environment.etc."netdata/cloud.d/cloud.conf".text = ''
+    [global]
+      enabled = no
+  '';
   services.nginx = {
     enable = true;
     recommendedOptimisation = true;
