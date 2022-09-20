@@ -16,7 +16,7 @@ in
   services.netdata = {
     enable = true;
     configDir = {
-      "cloud.d/cloud.conf" = pkgs.writeText "cloud.conf" ''
+      "../cloud.d/cloud.conf" = pkgs.writeText "cloud.conf" ''
         [global]
           enabled = no
       '';
