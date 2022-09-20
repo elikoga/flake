@@ -24,8 +24,8 @@ in
     [global]
       enabled = no
     EOF
-    chmod -r 0770 /var/lib/netdata/cloud.d
-    chown -r netdata:netdata /var/lib/netdata/cloud.d
+    chmod -R 0770 /var/lib/netdata/cloud.d
+    chown -R netdata:netdata /var/lib/netdata/cloud.d
   '';
   services.nginx = {
     enable = true;
