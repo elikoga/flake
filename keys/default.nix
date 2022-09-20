@@ -1,8 +1,12 @@
-{ lib, ... }:
+{ lib ? (import <nixpkgs> { }).lib
+, ...
+}:
 # Module setting access keys for systems
-let keyfiles = (import ./keyfiles.nix {
-  inherit lib;
-}); in
+let
+  keyfiles = (import ./keyfiles.nix {
+    inherit lib;
+  });
+in
 {
   users.users = lib.attrsets.mapAttrs
     (key: value: {

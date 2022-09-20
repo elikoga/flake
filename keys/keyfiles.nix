@@ -10,9 +10,11 @@ let
   splitAndClean = name: value: {
     name = head (split ".keys" name);
     value = filter
-      (potentialKey: !(
-        isList potentialKey
-        || potentialKey == ""
+      (potentialKey: (
+        isString potentialKey
+        && potentialKey != ""
+        # cannot start as a comment
+        && (substring 0 1 potentialKey) != "#"
       ))
       (split "\n" value);
   };

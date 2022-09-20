@@ -7,6 +7,7 @@ in
     (inputs.self + "/nixos/modules/profiles/base.nix")
     (inputs.self + "/nixos/modules/profiles/contabo.nix")
     inputs.vscode-server.nixosModule
+    inputs.agenix.nixosModule
   ];
 
   services.openssh.enable = true;
@@ -35,6 +36,8 @@ in
     pkgs.git
     pkgs.nixpkgs-fmt
     pkgs.neovim
+
+    inputs.agenix.defaultPackage.x86_64-linux
   ];
 
   environment.variables = {
