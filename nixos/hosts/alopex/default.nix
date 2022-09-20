@@ -1,4 +1,4 @@
-{ inputs, lib, ... }:
+{ inputs, pkgs, lib, ... }:
 let
   keyfiles = import (inputs.self + "/keys/keyfiles.nix") { inherit lib; };
 in
