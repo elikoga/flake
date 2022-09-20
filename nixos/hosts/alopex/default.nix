@@ -11,7 +11,6 @@ in
 
   services.openssh.enable = true;
   services.vscode-server.enable = true;
-  services.dhcpd6.enable = true;
 
   users.users.elikoga = {
     openssh.authorizedKeys.keys = keyfiles.elikoga;
