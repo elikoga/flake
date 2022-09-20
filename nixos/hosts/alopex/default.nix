@@ -24,6 +24,8 @@ in
     [global]
       enabled = no
     EOF
+    chmod 0770 cloud.conf
+    chown netdata:netdata cloud.conf
   '';
   services.nginx = {
     enable = true;
