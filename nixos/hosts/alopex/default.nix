@@ -11,6 +11,7 @@ in
   ];
 
   services.openssh.enable = true;
+  services.fail2ban.enable = true;
   services.vscode-server.enable = true;
   services.netdata.enable = true;
   services.nginx = {
