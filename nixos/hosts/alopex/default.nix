@@ -15,6 +15,7 @@ in
   services.vscode-server.enable = true;
   services.netdata.enable = true;
   services.nginx = {
+    enable = true;
     recommendedOptimisation = true;
     recommendedTlsSettings = true;
     recommendedGzipSettings = true;
