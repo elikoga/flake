@@ -15,6 +15,16 @@ in
   services.vscode-server.enable = true;
   services.netdata = {
     enable = true;
+    config = {
+      db = {
+        "mode" = "dbengine";
+        "update every" = 1;
+        "storage tiers" = 3;
+        "dbengine multihost disk space MB" = 1100;
+        "dbengine tier 1 multihost disk space MB" = 330;
+        "dbengine tier 2 multihost disk space MB" = 67;
+      };
+    };
   };
   # see https://discourse.nixos.org/t/how-to-create-folder-in-var-lib-with-nix/15647
   # https://github.com/NixOS/nixpkgs/blob/2ddc335e6f32b875e14ad9610101325b306a0add/nixos/modules/system/activation/activation-script.nix#L214-L228
