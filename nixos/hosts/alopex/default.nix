@@ -65,6 +65,20 @@ in
   };
 
   age.secrets.alopex_oauth2_proxy_keyFile.file = inputs.self + "/secrets/alopex_oauth2_proxy_keyFile.age";
+  age.secrets.swtpra-gitlab-runner-registration.file = inputs.self + "/secrets/swtpra-gitlab-runner-registration.age";
+
+  services.gitlab-runner = {
+    enable = true;
+    services = {
+      default-swtpra = {
+        # File should contain at least these two variables:
+        # `CI_SERVER_URL`
+        # `REGISTRATION_TOKEN`
+        registrationConfigFile = config.age.secrets.swtpra-gitlab-runner-registration.path;
+        dockerImage = "debian:stable";
+      };
+    };
+  };
 
   services.oauth2_proxy = {
     enable = true;
