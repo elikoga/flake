@@ -69,6 +69,9 @@ in
 
   services.gitlab-runner = {
     enable = true;
+    concurrent = 8;
+    gracefulTermination = true;
+    gracefulTimeout = "5min";
     services = {
       default-swtpra = {
         # File should contain at least these two variables:
