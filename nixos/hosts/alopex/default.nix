@@ -113,6 +113,8 @@ in
     };
   };
 
+  virtualisation.docker.autoPrune.enable = true;
+
   services.oauth2_proxy = {
     enable = true;
     nginx.virtualHosts = [
