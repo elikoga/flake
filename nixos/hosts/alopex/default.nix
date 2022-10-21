@@ -65,6 +65,7 @@ in
   };
 
   age.secrets.alopex_oauth2_proxy_keyFile.file = inputs.self + "/secrets/alopex_oauth2_proxy_keyFile.age";
+  age.secrets.swtpra12draft-gitlab-runner-registration.file = inputs.self + "/secrets/swtpra12draft-gitlab-runner-registration.age";
   age.secrets.swtpra-gitlab-runner-registration.file = inputs.self + "/secrets/swtpra-gitlab-runner-registration.age";
 
   services.gitlab-runner = {
@@ -73,14 +74,32 @@ in
     gracefulTermination = true;
     gracefulTimeout = "5min";
     services = {
-      default-swtpra = {
+      default-swtpra12draft = {
+        # File should contain at least these two variables:
+        # `CI_SERVER_URL`
+        # `REGISTRATION_TOKEN`
+        registrationConfigFile = config.age.secrets.swtpra12draft-gitlab-runner-registration.path;
+        dockerImage = "debian:stable";
+      };
+      docker-swtpra12draft = {
+        # File should contain at least these two variables:
+        # `CI_SERVER_URL`
+        # `REGISTRATION_TOKEN`
+        registrationConfigFile = config.age.secrets.swtpra12draft-gitlab-runner-registration.path;
+        dockerImage = "docker:stable";
+        dockerVolumes = [
+          "/var/run/docker.sock:/var/run/docker.sock"
+        ];
+        tagList = [ "docker-images" ];
+      };
+      default-swtpra12 = {
         # File should contain at least these two variables:
         # `CI_SERVER_URL`
         # `REGISTRATION_TOKEN`
         registrationConfigFile = config.age.secrets.swtpra-gitlab-runner-registration.path;
         dockerImage = "debian:stable";
       };
-      docker-swtpra = {
+      docker-swtpra12 = {
         # File should contain at least these two variables:
         # `CI_SERVER_URL`
         # `REGISTRATION_TOKEN`
@@ -89,7 +108,7 @@ in
         dockerVolumes = [
           "/var/run/docker.sock:/var/run/docker.sock"
         ];
-        tagList = [ "docker-images" ];
+        tagList = [ "docker-images" "docker" ];
       };
     };
   };
