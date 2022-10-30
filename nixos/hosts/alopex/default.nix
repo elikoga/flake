@@ -114,6 +114,7 @@ in
   };
 
   virtualisation.docker.autoPrune.enable = true;
+  virtualisation.docker.autoPrune.dates = "hourly";
 
   services.oauth2_proxy = {
     enable = true;
