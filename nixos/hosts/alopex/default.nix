@@ -114,7 +114,22 @@ in
   };
 
   virtualisation.docker.autoPrune.enable = true;
-  virtualisation.docker.autoPrune.dates = "hourly";
+  virtualisation.docker.autoPrune.dates = "monthly";
+
+  systemd.services.docker-prune-volumes = {
+    description = "Prune docker volumes";
+
+    restartIfChanged = false;
+    unitConfig.X-StopOnRemoval = false;
+
+    serviceConfig.Type = "oneshot";
+
+    script = ''
+      ${config.virtualisation.docker.package}/bin/docker volume prune -f
+    '';
+
+    startAt = "daily";
+  };
 
   services.oauth2_proxy = {
     enable = true;
